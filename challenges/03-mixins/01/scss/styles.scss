@@ -9,3 +9,64 @@ body {
   text-align: center;
   padding: 10vh 0;
 }
+
+@mixin gradient ($deg, $clr1, $clr2) {
+  background-image: linear-gradient($deg, $clr1, $clr2);
+}
+
+@mixin pseudo-underline ($width, $height, $bc, $margin) {
+  content: '';
+  display: block;
+  margin: $margin auto;
+  width: $width;
+  height: $height;
+  background-color: $bc;
+}
+
+@mixin ui-element ($color, $bg-color, $hover-color: $color, $hover-bg-color: $bg-color, $size: 0.5rem) {
+  display: inline-block;
+  padding: $size calc(3 * $size);
+  color: $color;
+  background-color: $bg-color;
+
+  &:hover, &:focus {
+    color: $hover-color;
+    background-color: $hover-bg-color;
+  }
+}
+
+.section-one {
+  @include gradient(-45deg, hotpink, palegoldenrod);
+  color: #636363;
+}
+
+.section-two {
+  @include gradient(90deg,  paleturquoise, peachpuff);
+  color: #636363;
+}
+
+.section-three {
+  @include gradient(180deg, aqua, cornflowerblue)
+}
+
+.title {
+  &::after {
+    @include pseudo-underline(20ch, 2px, #336699, 1rem)
+  }
+}
+
+.button-one {
+  @include ui-element($color: white, $bg-color: orange, $hover-color: orange, $hover-bg-color: blue, $size: 1rem)
+}
+
+.button-two {
+  @include ui-element($color: black, $bg-color: white, $hover-color: white, $hover-bg-color: blue, $size: 10px)
+}
+
+.badge-one {
+  @include ui-element($color: white, $bg-color: orange);
+}
+
+.badge-two {
+  @include ui-element($bg-color: white, $color: orange);
+}
